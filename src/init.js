@@ -69,11 +69,17 @@ module.exports = function(files, basePath, jspm, client) {
     jspm.serveFiles = [];
   if(!jspm.packages)
     jspm.packages = getJspmPackageJson(basePath).directories.packages || "jspm_packages/";
+  if(!jspm.testFileRegex)
+    jspm.testFileRegex = '\\.js$';
+  if(!jspm.testFileReplace)
+    jspm.testFileReplace = '$1';
   if(!client.jspm)
     client.jspm = {};
 
   // Pass on useBundles option to client
   client.jspm.useBundles = jspm.useBundles;
+  client.jspm.testFileRegex = jspm.testFileRegex;
+  client.jspm.testFileReplace = jspm.testFileReplace;
 
   var packagesPath = path.normalize(basePath + '/' + jspm.packages + '/');
   var configPath = path.normalize(basePath + '/' + jspm.config);

@@ -18,9 +18,10 @@
 
     // Prevent immediately starting tests.
     window.__karma__.loaded = function() {};
+    var testFileRegex = new RegExp(karma.config.jspm.testFileRegex);
 
     function extractModuleName(fileName){
-        return fileName.replace(/\.js$/, "");
+        return fileName.replace(testFileRegex, karma.config.jspm.testFileReplace);
     }
 
     var promises = [];
